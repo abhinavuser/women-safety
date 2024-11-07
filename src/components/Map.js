@@ -1,3 +1,4 @@
+// src/components/Map.js
 'use client'
 
 import React from "react"
@@ -14,13 +15,13 @@ L.Icon.Default.mergeOptions({
 })
 
 export default function Map({ alerts }) {
-  const center = [39.8283, -98.5795] // Center of the US
+  const center = [12.84189, 80.15483]  // VIT Chennai center
 
   return (
     <div className="w-full lg:w-2/3 h-[calc(100vh-12rem)]">
       <MapContainer
         center={center}
-        zoom={4}
+        zoom={12}  // Adjust zoom level for a better view of the area
         className="w-full h-full rounded-lg shadow-inner"
         style={{ height: "100%", width: "100%" }}
       >

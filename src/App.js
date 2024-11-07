@@ -18,7 +18,7 @@ export default function App() {
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen)
 
-  const handleMenuItemClick = (id: string) => {
+  const handleMenuItemClick = (id) => {
     setActivePage(id)
     setIsMenuOpen(false)
   }

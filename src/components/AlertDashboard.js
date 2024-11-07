@@ -53,26 +53,26 @@ export default function AlertDashboard() {
   const [alerts, setAlerts] = useState([])
 
   useEffect(() => {
-    // Mock data for SOS alerts
+    // Mock data for SOS alerts 
     const mockAlerts = [
       {
         $id: "1",
         user_id: "User_123",
-        location: { latitude: 41.8781, longitude: -87.6298 },
+        location: { latitude: 12.84189, longitude: 80.15483 }, // VIT Chennai
         timestamp: new Date(),
         status: "active",
       },
       {
         $id: "2",
         user_id: "User_456",
-        location: { latitude: 34.0522, longitude: -118.2437 },
+        location: { latitude: 13.060416, longitude: 80.249634 }, // Nearby Location
         timestamp: new Date(),
         status: "active",
       },
       {
         $id: "3",
         user_id: "User_789",
-        location: { latitude: 40.7128, longitude: -74.006 },
+        location: { latitude: 12.9000, longitude: 80.2000 }, // Another nearby location
         timestamp: new Date(),
         status: "active",
       },
@@ -96,4 +96,5 @@ export default function AlertDashboard() {
     </motion.div>
   )
 }
+
 
