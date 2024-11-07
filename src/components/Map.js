@@ -1,33 +1,49 @@
-// src/components/Map.js
-import React from "react";
-import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
-import "leaflet/dist/leaflet.css";
+'use client'
 
-function Map({ alerts }) {
-  const center = [41.8781, -87.6298]; // Example: Chicago coordinates
+import React from "react"
+import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet"
+import L from "leaflet"
+import "leaflet/dist/leaflet.css"
+
+// Fix for default marker icon
+delete L.Icon.Default.prototype._getIconUrl
+L.Icon.Default.mergeOptions({
+  iconRetinaUrl: require("leaflet/dist/images/marker-icon-2x.png"),
+  iconUrl: require("leaflet/dist/images/marker-icon.png"),
+  shadowUrl: require("leaflet/dist/images/marker-shadow.png"),
+})
+
+export default function Map({ alerts }) {
+  const center = [39.8283, -98.5795] // Center of the US
 
   return (
-    <div className="flex-1 h-96 md:h-auto relative">
+    <div className="w-full lg:w-2/3 h-[calc(100vh-12rem)]">
       <MapContainer
         center={center}
-        zoom={10}
-        className="w-full h-full rounded-lg shadow"
+        zoom={4}
+        className="w-full h-full rounded-lg shadow-inner"
         style={{ height: "100%", width: "100%" }}
       >
         <TileLayer
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         />
-        {alerts.map(alert => (
-          <Marker key={alert.id} position={[alert.location.latitude, alert.location.longitude]}>
+        {alerts.map((alert) => (
+          <Marker
+            key={alert.$id}
+            position={[alert.location.latitude, alert.location.longitude]}
+          >
             <Popup>
-              SOS Alert from {alert.user_id} at {new Date(alert.timestamp).toLocaleString()}
+              <div className="text-sm">
+                <p className="font-semibold">SOS Alert</p>
+                <p>User ID: {alert.user_id}</p>
+                <p>Status: {alert.status}</p>
+                <p>Time: {new Date(alert.timestamp).toLocaleString()}</p>
+              </div>
             </Popup>
           </Marker>
         ))}
       </MapContainer>
     </div>
-  );
+  )
 }
-
-export default Map;
