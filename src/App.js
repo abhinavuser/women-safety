@@ -4,6 +4,7 @@ import React, { useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { Menu, X } from "lucide-react"
 import AlertDashboard from "./components/AlertDashboard"
+import Documentation from "./components/Documentation"
 
 const menuItems = [
   { title: "Dashboard", id: "dashboard" },
@@ -84,12 +85,7 @@ export default function App() {
       <main className="flex-grow p-4 sm:p-6 lg:p-8">
         <div className="max-w-7xl mx-auto">
           {activePage === "dashboard" && <AlertDashboard />}
-          {activePage === "documentation" && (
-            <div className="bg-white p-6 rounded-lg shadow-lg">
-              <h2 className="text-2xl font-bold mb-4">Documentation</h2>
-              <p>Here you can add the documentation for your project.</p>
-            </div>
-          )}
+          {activePage === "documentation" && <Documentation />}
           {activePage === "surveillance" && (
             <div className="bg-white p-6 rounded-lg shadow-lg">
               <h2 className="text-2xl font-bold mb-4">Surveillance</h2>
