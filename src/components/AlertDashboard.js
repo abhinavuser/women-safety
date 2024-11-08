@@ -1,11 +1,11 @@
-/* appwrite
 'use client'
 
 import React, { useState, useEffect } from "react"
 import { motion } from "framer-motion"
-import { databases } from "../appwrite" // Use Appwrite for fetching alerts
 import AlertList from "./AlertList"
 import Map from "./Map"
+import { collection, getDocs } from "firebase/firestore"
+import { firestore } from "../firebaseConfig" // Ensure Firestore instance is imported
 
 export default function AlertDashboard() {
   const [alerts, setAlerts] = useState([])
@@ -13,13 +13,14 @@ export default function AlertDashboard() {
   useEffect(() => {
     const fetchAlerts = async () => {
       try {
-        const response = await databases.listDocuments(
-          "YOUR_DATABASE_ID",
-          "YOUR_COLLECTION_ID"
-        )
-        setAlerts(response.documents)
+        const querySnapshot = await getDocs(collection(firestore, "sos"));
+        const alertsData = querySnapshot.docs.map(doc => ({
+          $id: doc.id,
+          ...doc.data(),
+        }));
+        setAlerts(alertsData);
       } catch (error) {
-        console.error("Error fetching alerts:", error)
+        console.error("Error fetching alerts:", error);
       }
     }
 
@@ -40,7 +41,8 @@ export default function AlertDashboard() {
     </motion.div>
   )
 }
-*/
+
+/*
 
 'use client'
 
@@ -97,4 +99,4 @@ export default function AlertDashboard() {
   )
 }
 
-
+*/

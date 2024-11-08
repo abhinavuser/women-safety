@@ -1,4 +1,3 @@
-// src/components/Map.js
 'use client'
 
 import React from "react"
@@ -21,7 +20,7 @@ export default function Map({ alerts }) {
     <div className="w-full lg:w-2/3 h-[calc(100vh-12rem)]">
       <MapContainer
         center={center}
-        zoom={12}  // Adjust zoom level for a better view of the area
+        zoom={12}
         className="w-full h-full rounded-lg shadow-inner"
         style={{ height: "100%", width: "100%" }}
       >
@@ -30,19 +29,21 @@ export default function Map({ alerts }) {
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         />
         {alerts.map((alert) => (
-          <Marker
-            key={alert.$id}
-            position={[alert.location.latitude, alert.location.longitude]}
-          >
-            <Popup>
-              <div className="text-sm">
-                <p className="font-semibold">SOS Alert</p>
-                <p>User ID: {alert.user_id}</p>
-                <p>Status: {alert.status}</p>
-                <p>Time: {new Date(alert.timestamp).toLocaleString()}</p>
-              </div>
-            </Popup>
-          </Marker>
+          alert.latitude && alert.longitude && (
+            <Marker
+              key={alert.$id}
+              position={[alert.latitude, alert.longitude]}
+            >
+              <Popup>
+                <div className="text-sm">
+                  <p className="font-semibold">SOS Alert</p>
+                  <p>User ID: {alert.userId}</p>
+                  <p>Status: {alert.status}</p>
+                  <p>Time: {new Date(alert.timestamp.toDate()).toLocaleString()}</p>
+                </div>
+              </Popup>
+            </Marker>
+          )
         ))}
       </MapContainer>
     </div>
