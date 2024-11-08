@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from "framer-motion"
 import { Menu, X } from "lucide-react"
 import AlertDashboard from "./components/AlertDashboard"
 import Documentation from "./components/Documentation"
+import Surveillance from "./components/Surveillance"
 
 const menuItems = [
   { title: "Dashboard", id: "dashboard" },
@@ -86,12 +87,7 @@ export default function App() {
         <div className="max-w-7xl mx-auto">
           {activePage === "dashboard" && <AlertDashboard />}
           {activePage === "documentation" && <Documentation />}
-          {activePage === "surveillance" && (
-            <div className="bg-white p-6 rounded-lg shadow-lg">
-              <h2 className="text-2xl font-bold mb-4">Surveillance</h2>
-              <p>This section will integrate your ML model for surveillance.</p>
-            </div>
-          )}
+          {activePage === "surveillance" && <Surveillance />}
           {activePage === "about" && (
             <div className="bg-white p-6 rounded-lg shadow-lg">
               <h2 className="text-2xl font-bold mb-4">About Us</h2>
